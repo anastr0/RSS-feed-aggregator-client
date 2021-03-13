@@ -1,23 +1,23 @@
 <template>
   <div id="app">
     <Header />
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld />
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <GetRSSFeed />
     <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Layout/Header.vue'
 import Footer from './components/Layout/Footer.vue'
+import GetRSSFeed from './components/RSS/GetRSSFeed.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
     Header,
-    Footer
+    Footer,
+    GetRSSFeed
   }
 }
 </script>

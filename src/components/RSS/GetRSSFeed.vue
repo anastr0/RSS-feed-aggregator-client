@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import SearchBar from 'SearchBar.vue'
-import SearchResults from 'SearchResults.vue'
+import SearchBar from './SearchBar.vue'
+import SearchResults from './SearchResults.vue'
 
 export default {
   name: 'GetRSSFeed',
   components: {
     SearchBar,
-    SearchResults
-  }
+    SearchResults,
+  },
 }
 </script>
 

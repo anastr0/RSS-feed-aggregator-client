@@ -2,10 +2,10 @@
   <b-container class="search-bar" fluid> 
     <b-row>     
         <b-col sm="10">
-            <b-form-input v-model="feedUrl" :id="url" placeholder="Enter RSS feed link"></b-form-input>
+            <b-form-input v-model="feedUrl" placeholder="Enter RSS link"></b-form-input>
         </b-col>
         <b-col sm="2">
-            <b-button class="search-button" variant="dark" v-on:click="consoleURL">Get feed</b-button>
+            <b-button class="search-button" variant="dark" v-on:click="consoleURL"> feed</b-button>
         </b-col>
     </b-row>
   </b-container>
@@ -23,9 +23,8 @@ import fetchRSSFeed from "../../utils/fetchRSS"
       }
     },
     methods: {
-        consoleURL () {
-            alert(this.feedUrl);
-            // this.feed = fetchRSSFeed();
+        consoleURL () {            
+            console.log(fetchRSSFeed)
         }
     }
   }
