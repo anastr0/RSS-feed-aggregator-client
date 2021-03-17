@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <GetRSSFeed />
+    <RSSParentComponent />
     <Footer />
   </div>
 </template>
@@ -10,14 +9,14 @@
 <script>
 import Header from './components/Layout/Header.vue'
 import Footer from './components/Layout/Footer.vue'
-import GetRSSFeed from './components/RSS/GetRSSFeed.vue'
+import RSSParentComponent from './components/RSSParentComponent.vue'
 
 export default {
   name: 'app',
   components: {
     Header,
     Footer,
-    GetRSSFeed
+    RSSParentComponent
   }
 }
 </script>
