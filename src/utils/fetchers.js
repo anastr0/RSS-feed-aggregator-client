@@ -1,23 +1,25 @@
+const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
+const version_number = 1
 
-const server_domain = "server_domain.com"
 
 export const fetchRSSFeed = (feedURL) => {
-    // POST request with feedURL query
-    // Server response with RSS feed to given feedURL
+  // POST request with feedURL query
+  // Server response with RSS feed to given feedURL
 
-    return fetch(`${server_domain}/v1/rss-feed`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formatData(query))
-    })
+  // console.log(JSON.stringify({ feedURL }));
+  return fetch(`${server_domain}/v${version_number}/rss-feed/`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ feedURL }),
+  })
     .then((res) => res.json())
     .catch((err) => {
-        console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 
 export const fetchAggregatedRSSFeed = () => {
     // GET request with stored feedURLs
