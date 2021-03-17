@@ -1,6 +1,13 @@
 const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
 const version_number = 1
 
+export const validated = (feedURL) => {
+  if (feedURL.length>0) {
+    return true 
+  }
+  return false
+}
+
 export const addURL = (feedURL) => {
   if (typeof localStorage.getItem("feedURLs") == "undefined") {
     console.log(feedURL + " set");
@@ -12,7 +19,7 @@ export const addURL = (feedURL) => {
       localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
     } else {
       if (currentURLs.includes(feedURL)) {
-        alert("Already in localstorage");
+        alert("Already added to daily news feed");
       } else {
         currentURLs.push(feedURL);
         localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
