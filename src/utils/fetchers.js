@@ -2,39 +2,46 @@ const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
 const version_number = 1
 
 export const validated = (feedURL) => {
+  // validate string
   if (feedURL.length>0) {
     return true 
   }
   return false
 }
 
+const notifyAdd = (feedURL) => {
+  // notify user of adding URL
+    alert("Added " + feedURL + " to daily news feed" )
+    window.location.reload()
+}
+
 export const addURL = (feedURL) => {
+  // add URL to localstorage after validation
   if (typeof localStorage.getItem("feedURLs") == "undefined") {
     console.log(feedURL + " set");
     localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
-    alert("Added " + feedURL + " to daily news feed" )
-    window.location.reload()
+    notifyAdd(feedURL)
   } else {
     var currentURLs = JSON.parse(localStorage.getItem("feedURLs"));
     console.log(currentURLs);
     if (currentURLs == null) {
       localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
-      alert("Added " + feedURL + " to daily news feed" )
-      window.location.reload()
+      notifyAdd(feedURL)
     } else {
       if (currentURLs.includes(feedURL)) {
         alert("Already added to daily news feed");
       } else {
         currentURLs.push(feedURL);
         localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
-        alert("Added " + feedURL + " to daily news feed" )
-        window.location.reload()
+        notifyAdd(feedURL)
       }
     }
   }
 };
 
 const getFeedURLs = () => {
+  // read stringified list of feedURLs from localstorage
+  // return JSON for /aggregate req
   var feedURLs = JSON.parse(localStorage.getItem("feedURLs"))
   return JSON.stringify({feedURLs})
 }

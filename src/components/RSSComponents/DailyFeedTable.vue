@@ -71,7 +71,9 @@
         aria-controls="daily-feed-results"
         size="sm"
         limit="1"
-      ></b-pagination>
+      >
+      </b-pagination>
+      <div class="row-no">{{this.rows}} feed items</div>
     </b-row>
   </b-container>
 </template>
@@ -148,5 +150,8 @@ export default {
 
 img {
   max-width: 70vw;
+}
+.row-no {
+  padding: 8px;
 }
 </style>

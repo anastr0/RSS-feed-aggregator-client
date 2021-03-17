@@ -71,6 +71,7 @@
         size="sm"
         limit="1"
       ></b-pagination>
+      <div class="row-no">{{this.rows}} feed items</div>
     </b-row>
   </b-container>
 </template>
@@ -136,5 +137,8 @@ export default {
 }
 img {
   max-width: 500px;
+}
+.row-no {
+  padding: 8px;
 }
 </style>
