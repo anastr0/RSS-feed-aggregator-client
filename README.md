@@ -1,6 +1,9 @@
 # RSS-feed-aggregator-client
 Vuejs application that parses RSS feeds and shows aggregated daily news feed. [Try now](https://anaswaratrajan.github.io/RSS-feed-aggregator-client/)!
 
+
+Check out [server](https://github.com/anaswaratrajan/RSS-feed-aggregator-server) repository.
+
 ## Table of contents
 
 - [Prerequisites](#prerequisites)
