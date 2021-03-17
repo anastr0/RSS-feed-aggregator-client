@@ -10,7 +10,7 @@ Check out [server](https://github.com/anaswaratrajan/RSS-feed-aggregator-server)
 - [Setup](#Setup)
 - [Usage](#Usage)
 - [Features](#Features)
-- [Repository-structure ](#Repository-structure )
+- [Repository-Structure](#Repository-Structure )
 
 # Prerequisites
 
@@ -42,7 +42,7 @@ npm run serve
 * Both sections have feed list sortable by published date
 * Burger icon expands each headline to render the content ( Also renders html content )
 
-# Repository 
+# Repository-Structure 
 
 ```
 .
