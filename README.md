@@ -7,10 +7,11 @@ Vuejs application that parses RSS feeds and shows aggregated daily news feed. [T
 - [Setup](#Setup)
 - [Usage](#Usage)
 - [Features](#Features)
+- [Repository-structure ](#Repository-structure )
 
 # Prerequisites
 
-* GO 1.4+
+* node 14.7+
 * Vue-cli
 
 # Setup
@@ -38,3 +39,23 @@ npm run serve
 * Both sections have feed list sortable by published date
 * Burger icon expands each headline to render the content ( Also renders html content )
 
+# Repository 
+
+```
+.
+├── App.vue
+├── assets
+│   └── logo.png
+├── components
+│   ├── Layout
+│   │   ├── Footer.vue
+│   │   └── Header.vue
+│   ├── RSSComponents
+│   │   ├── DailyFeedTable.vue
+│   │   ├── RSSFeedTable.vue
+│   │   └── SearchBar.vue
+│   └── RSSParentComponent.vue
+├── main.js
+└── utils
+    └── fetchers.js
+```
