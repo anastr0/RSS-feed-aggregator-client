@@ -1,55 +1,56 @@
 const server_domain = "http://localhost:5000";
-const version_number = 1
-// Had no time to setup .env. Sorry. 
+const version_number = 1;
+// Had no time to setup .env. Sorry.
 
 export const validated = (feedURL) => {
   // validate string
-  
-  if (feedURL.length>0) {
+
+  if (feedURL.length > 0) {
     if (validURL(feedURL)) {
-      return true 
+      return true;
     } else {
-      console.log(feedURL)
-      alert("Enter valid URL") 
-      return false
+      console.log(feedURL);
+      alert("Enter valid URL");
+      return false;
     }
-  } else {
-    alert("Enter URL")
-    return false
   }
-  
-}
+  alert("Enter URL");
+  return false;
+};
 
 export const validURL = (feedURL) => {
   // validate string
-    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-    return !!pattern.test(feedURL);
-}
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+  return !!pattern.test(feedURL);
+};
 
 const notifyAdd = (feedURL) => {
   // notify user of adding URL
-    alert("Added " + feedURL + " to daily news feed" )
-    window.location.reload()
-}
+  alert("Added " + feedURL + " to daily news feed");
+  window.location.reload();
+};
 
 export const addURL = (feedURL) => {
   // add URL to localstorage after validation
-  console.log(feedURL)
+  console.log(feedURL);
   if (typeof localStorage.getItem("feedURLs") == "undefined") {
     console.log(feedURL + " set");
     localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
-    notifyAdd(feedURL)
+    notifyAdd(feedURL);
   } else {
     var currentURLs = JSON.parse(localStorage.getItem("feedURLs"));
     console.log(currentURLs);
     if (currentURLs == null) {
       localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
-      notifyAdd(feedURL)
+      notifyAdd(feedURL);
     } else {
       if (currentURLs.includes(feedURL)) {
         alert("Already added to daily news feed");
@@ -57,7 +58,7 @@ export const addURL = (feedURL) => {
         if (validated(feedURL)) {
           currentURLs.push(feedURL);
           localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
-          notifyAdd(feedURL)
+          notifyAdd(feedURL);
         }
       }
     }
@@ -67,16 +68,16 @@ export const addURL = (feedURL) => {
 const getFeedURLs = () => {
   // read stringified list of feedURLs from localstorage
   // return JSON for /aggregate req
-  var feedURLs = JSON.parse(localStorage.getItem("feedURLs"))
-  return JSON.stringify({feedURLs})
-}
+  var feedURLs = JSON.parse(localStorage.getItem("feedURLs"));
+  return JSON.stringify({ feedURLs });
+};
 
 export const fetchRSSFeed = (feedURL) => {
   // POST request with feedURL query
   // Server response with RSS feed to given feedURL
 
   // console.log(JSON.stringify({ feedURL }));
-  
+
   return fetch(`${server_domain}/v${version_number}/rss-feed/`, {
     method: "POST",
     mode: "cors",
