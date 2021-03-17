@@ -1,12 +1,34 @@
 const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
 const version_number = 1
 
+
 export const validated = (feedURL) => {
   // validate string
+  
   if (feedURL.length>0) {
-    return true 
+    if (validURL(feedURL)) {
+      return true 
+    } else {
+      console.log(feedURL)
+      alert("Enter valid URL") 
+      return false
+    }
+  } else {
+    alert("Enter URL")
+    return false
   }
-  return false
+  
+}
+
+export const validURL = (feedURL) => {
+  // validate string
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(feedURL);
 }
 
 const notifyAdd = (feedURL) => {
@@ -17,6 +39,7 @@ const notifyAdd = (feedURL) => {
 
 export const addURL = (feedURL) => {
   // add URL to localstorage after validation
+  console.log(feedURL)
   if (typeof localStorage.getItem("feedURLs") == "undefined") {
     console.log(feedURL + " set");
     localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
@@ -31,9 +54,11 @@ export const addURL = (feedURL) => {
       if (currentURLs.includes(feedURL)) {
         alert("Already added to daily news feed");
       } else {
-        currentURLs.push(feedURL);
-        localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
-        notifyAdd(feedURL)
+        if (validated(feedURL)) {
+          currentURLs.push(feedURL);
+          localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
+          notifyAdd(feedURL)
+        }
       }
     }
   }
@@ -51,6 +76,7 @@ export const fetchRSSFeed = (feedURL) => {
   // Server response with RSS feed to given feedURL
 
   // console.log(JSON.stringify({ feedURL }));
+  
   return fetch(`${server_domain}/v${version_number}/rss-feed/`, {
     method: "POST",
     mode: "cors",
