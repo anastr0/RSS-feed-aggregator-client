@@ -1,7 +1,5 @@
 # RSS-feed-aggregator-client
-Vuejs application that parses RSS feeds and shows aggregated daily news feed. 
-
-npm install vue bootstrap bootstrap-vue 
+Vuejs application that parses RSS feeds and shows aggregated daily news feed.
 
 # Setup
 
@@ -18,4 +16,3 @@ npm run serve
 ```
 npx vue-cli-service lint
 ```
-
