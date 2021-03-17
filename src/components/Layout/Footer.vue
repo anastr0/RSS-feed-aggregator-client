@@ -1,22 +1,26 @@
 <template>
   <footer>
     <div>
-        <b-nav small>
-            <b-nav-item href="https://github.com/anaswaratrajan" active>Github</b-nav-item>
-        </b-nav>
+      <b-nav small>
+        <b-nav-item
+          href="https://github.com/anaswaratrajan/RSS-feed-aggregator-server"
+          active
+          >Server repo</b-nav-item
+        >
+      </b-nav>
     </div>
   </footer>
 </template>
 
 <script>
 export default {
-    name: 'Footer'
+  name: "Footer",
 };
 </script>
 
 <style>
 footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
 }

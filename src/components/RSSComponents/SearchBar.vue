@@ -8,13 +8,13 @@
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
           v-model="feedURL"
-          placeholder="Enter RSS link"
+          placeholder="Enter RSS feed link"
         />
       </b-col>
       <b-col sm="2">
         <button
           type="button"
-          class="search-button btn btn-secondary btn-block"
+          class="search-button btn btn-info btn-block"
           v-on:click="$emit('get-feed', feedURL)"
         >
           get feed
@@ -23,7 +23,7 @@
       <b-col sm="2">
         <button
           type="button"
-          class="search-button btn btn-secondary btn-block"
+          class="search-button btn btn-outline-info btn-block"
           v-on:click="setURLInCookie"
         >
           + daily feed
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { addURL } from "../../utils/fetchers";
+import { addURL, validated } from "../../utils/fetchers";
 
 export default {
   name: "SearchBar",
@@ -44,22 +44,28 @@ export default {
     };
   },
   methods: {
-    consoleURL: function () {
+    consoleURL: function() {
       console.log("haha");
     },
-    setURLInCookie: function (event) {
-      alert("Setting cookie "+ this.feedURL)
-      event.preventDefault()
-      addURL(this.feedURL)
-    }
+    setURLInCookie: function(event) {
+      event.preventDefault();
+      if (validated(this.feedURL)) {
+        addURL(this.feedURL);
+      } else {
+        alert("Enter a URL");
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 .search-bar {
-  padding: 20px;
+  padding: 30px 15px;
   width: 90vw;
+  box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%);
+  margin: 2rem 1rem;
+  display: inline-block;
 }
 
 /*
