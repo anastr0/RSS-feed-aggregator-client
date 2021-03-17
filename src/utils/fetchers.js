@@ -1,6 +1,6 @@
-const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
+const server_domain = "http://localhost:5000";
 const version_number = 1
-
+// Had no time to setup .env. Sorry. 
 
 export const validated = (feedURL) => {
   // validate string
