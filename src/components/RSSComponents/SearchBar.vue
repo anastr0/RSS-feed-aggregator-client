@@ -30,6 +30,7 @@
         </button>
       </b-col>
     </b-row>
+    <b-row> <div class="example">Eg. https://home.cern/api/news/news/feed.rss</div></b-row>
   </b-container>
 </template>
 
@@ -68,8 +69,9 @@ export default {
   display: inline-block;
 }
 
-/*
-.search-button {
-  width: inherit;
-}*/
+.example {
+  padding: 5px 20px;
+  color: grey;
+  font-size: 14px;
+}
 </style>
