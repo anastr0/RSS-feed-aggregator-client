@@ -12,18 +12,22 @@ export const addURL = (feedURL) => {
   if (typeof localStorage.getItem("feedURLs") == "undefined") {
     console.log(feedURL + " set");
     localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
+    alert("Added " + feedURL + " to daily news feed" )
+    window.location.reload()
   } else {
     var currentURLs = JSON.parse(localStorage.getItem("feedURLs"));
     console.log(currentURLs);
     if (currentURLs == null) {
       localStorage.setItem("feedURLs", JSON.stringify([feedURL]));
+      alert("Added " + feedURL + " to daily news feed" )
+      window.location.reload()
     } else {
       if (currentURLs.includes(feedURL)) {
         alert("Already added to daily news feed");
       } else {
         currentURLs.push(feedURL);
         localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
-        alert("Added " + this.feedURL + " to daily news feed" )
+        alert("Added " + feedURL + " to daily news feed" )
         window.location.reload()
       }
     }
