@@ -1,40 +1,69 @@
 <template>
-  <b-container class="search-bar" fluid> 
-    <b-row>     
-        <b-col sm="10">
-            <b-form-input v-model="feedUrl" placeholder="Enter RSS link"></b-form-input>
-        </b-col>
-        <b-col sm="2">
-            <b-button class="search-button" variant="dark" v-on:click="consoleURL"> feed</b-button>
-        </b-col>
+  <b-container class="search-bar" fluid>
+    <b-row>
+      <b-col sm="8">
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          v-model="feedURL"
+          placeholder="Enter RSS link"
+        />
+      </b-col>
+      <b-col sm="2">
+        <button
+          type="button"
+          class="search-button btn btn-secondary btn-block"
+          v-on:click="$emit('get-feed', feedURL)"
+        >
+          get feed
+        </button>
+      </b-col>
+      <b-col sm="2">
+        <button
+          type="button"
+          class="search-button btn btn-secondary btn-block"
+          v-on:click="setURLInCookie"
+        >
+          + daily feed
+        </button>
+      </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import fetchRSSFeed from "../../utils/fetchRSS"
+import { addURL } from "../../utils/fetchers";
 
-  export default {
-    name: "SearchBar",
-    data() {
-      return {
-        feedUrl: '',
-        feed: []
-      }
+export default {
+  name: "SearchBar",
+  data() {
+    return {
+      feedURL: "",
+    };
+  },
+  methods: {
+    consoleURL: function () {
+      console.log("haha");
     },
-    methods: {
-        consoleURL () {            
-            console.log(fetchRSSFeed)
-        }
+    setURLInCookie: function (event) {
+      alert("Setting cookie "+ this.feedURL)
+      event.preventDefault()
+      addURL(this.feedURL)
     }
-  }
+  },
+};
 </script>
 
-<style scoped> 
+<style scoped>
 .search-bar {
-    padding: 50px;
+  padding: 20px;
+  width: 90vw;
 }
+
+/*
 .search-button {
-    width: inherit;
-}
+  width: inherit;
+}*/
 </style>
