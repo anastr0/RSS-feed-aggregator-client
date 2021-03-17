@@ -9,9 +9,9 @@
         :items="this.items"
         :fields="fields"
         outlined
-      > 
-      <template #cell(pubDate)="data">
-          {{ data.item.pubDate.slice(0,10) }} 
+      >
+        <template #cell(pubDate)="data">
+          {{ data.item.pubDate.slice(0, 10) }}
         </template>
         <template #cell(link)="data">
           <a :href="`${data.item.link}`">
@@ -52,7 +52,11 @@
           <b-card>
             <b-row class="mb-2">
               <b-col sm="3" class="text-sm-right"><b>Title:</b></b-col>
-              <b-col>{{ row.item.title }}</b-col>
+              <b-col>{{ row.item.source }}</b-col>
+            </b-row>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right"><b>Title:</b></b-col>
+              <b-col>{{ row.item.guid }}</b-col>
             </b-row>
             <b-row class="mb-2">
               <b-col sm="3" class="text-sm-right"><b>Content:</b></b-col>
@@ -71,7 +75,7 @@
         size="sm"
         limit="1"
       ></b-pagination>
-      <div class="row-no">{{this.rows}} feed items</div>
+      <div class="row-no">{{ this.rows }} feed items</div>
     </b-row>
   </b-container>
 </template>
@@ -129,7 +133,6 @@ export default {
 }
 
 .feed-table {
-
   width: 90vw;
   box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%);
   margin: 2rem 1rem;

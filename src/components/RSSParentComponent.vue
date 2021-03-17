@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <b-progress class="w-100" :max="maxLoadingTime" height=".5rem">
+    <b-progress class="w-100" variant="info" :max="maxLoadingTime" height=".3rem">
       <b-progress-bar :value="loadingTime"></b-progress-bar>
     </b-progress>
     <SearchBar v-on:get-feed="getFeed" />

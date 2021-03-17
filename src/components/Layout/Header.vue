@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar type="dark" variant="info" small>
+    <b-navbar type="light" variant="faded" small>
       <b-navbar-brand href="#" active><h4>RSS feed</h4></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-navbar-nav class="ml-auto">
