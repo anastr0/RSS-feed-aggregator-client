@@ -1,4 +1,4 @@
-const server_domain = "http://localhost:5000";
+const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
 const version_number = 1;
 // Had no time to setup .env. Sorry.
 
@@ -19,16 +19,16 @@ export const validated = (feedURL) => {
 };
 
 export const validURL = (feedURL) => {
-  // validate string
+  // validate URL
   var pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
     "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+    "((\\d{1,3}\\.){3}\\d{1,3}))" + 
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + 
     "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ); // fragment locator
+  ); 
   return !!pattern.test(feedURL);
 };
 
