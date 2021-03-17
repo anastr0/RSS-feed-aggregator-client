@@ -52,8 +52,12 @@
         <template #row-details="row">
           <b-card>
             <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Title:</b></b-col>
-              <b-col>{{ row.item.title }}</b-col>
+              <b-col sm="3" class="text-sm-right"><b>Source:</b></b-col>
+              <b-col>{{ row.item.source }}</b-col>
+            </b-row>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right"><b>Guid:</b></b-col>
+              <b-col>{{ row.item.guid }}</b-col>
             </b-row>
             <b-row class="mb-2">
               <b-col sm="3" class="text-sm-right"><b>Content:</b></b-col>
