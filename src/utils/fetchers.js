@@ -23,6 +23,8 @@ export const addURL = (feedURL) => {
       } else {
         currentURLs.push(feedURL);
         localStorage.setItem("feedURLs", JSON.stringify(currentURLs));
+        alert("Added " + this.feedURL + " to daily news feed" )
+        window.location.reload()
       }
     }
   }
