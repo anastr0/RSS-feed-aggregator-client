@@ -1,5 +1,3 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production'
-    ? '/RSS-feed-aggregator-client/'
-    : '/'
+    publicPath: '/RSS-feed-aggregator-client/'
 }
