@@ -50,10 +50,8 @@ export default {
     },
     setURLInCookie: function(event) {
       event.preventDefault();
-      if (validated(this.feedURL)) {
-        addURL(this.feedURL);
-      } else {
-        alert("Enter a URL");
+      if (validated(this.feedURL.trim())) {
+        addURL(this.feedURL.trim());
       }
     },
   },

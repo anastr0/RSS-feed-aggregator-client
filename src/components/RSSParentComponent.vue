@@ -63,14 +63,13 @@ export default {
     getFeed: function(feedURL) {
       console.log(feedURL);
       // feedURL = "https://home.cern/api/news/news/feed.rss"
-      if (validated(feedURL)) {
+
+      if (validated(feedURL.trim())) {
         this.startLoading();
-        fetchRSSFeed(feedURL).then((data) => {
+        fetchRSSFeed(feedURL.trim()).then((data) => {
           this.queryDone = true;
           this.feed = data.RSSFeedList;
         });
-      } else {
-        alert("Enter a URL first");
       }
     },
     startLoading: function() {
