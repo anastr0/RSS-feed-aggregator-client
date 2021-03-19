@@ -1,5 +1,5 @@
-const server_domain = "https://rss-feed-aggregater-server.herokuapp.com";
-const version_number = 1;
+const server_domain = process.env.VUE_APP_SERVER_DOMAIN;
+const version_number = process.env.VUE_APP_VERSION_NUMBER;
 // Had no time to setup .env. Sorry.
 
 export const validated = (feedURL) => {
