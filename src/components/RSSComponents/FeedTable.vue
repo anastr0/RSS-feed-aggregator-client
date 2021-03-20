@@ -1,0 +1,127 @@
+<template>
+  <b-container class="feed-table shadows" fluid>
+    <b-row align-h="center">
+      <b-table
+        hover
+        v-bind:id="feedTableId"
+        :current-page="currentPage"
+        :per-page="perPage"
+        :items="feed"
+        :fields="fields"
+        outlined
+      >
+        <template #cell(title)="data">
+          <a :href="`${data.item.link}`" class="link-info">{{ data.item.title }}</a>
+        </template>
+
+        <template #cell(pubDate)="data">
+          {{ data.item.pubDate.slice(0, 10) }}
+        </template>
+
+        <template #cell(content)="row">
+          <b-button
+            variant="outline-info"
+            class="mb-2 content"
+            @click="row.toggleDetails"
+          >
+            <b-icon icon="justify" aria-hidden="true"></b-icon>
+          </b-button>
+        </template>
+
+        <template #row-details="row">
+          <b-card>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right"><b>Source:</b></b-col>
+              <b-col>{{ row.item.source }}</b-col>
+            </b-row>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right"><b>Guid:</b></b-col>
+              <b-col>{{ row.item.guid }}</b-col>
+            </b-row>
+            <b-row class="mb-2">
+              <b-col sm="3" class="text-sm-right"><b>Content:</b></b-col>
+              <b-col
+                ><span class="feed-content" v-html="row.item.description"></span
+              ></b-col>
+            </b-row>
+          </b-card>
+        </template>
+      </b-table>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        :aria-controls="daily - feed - results"
+        size="sm"
+        limit="1"
+        align="center"
+      >
+      </b-pagination>
+      <div class="row-no">{{ this.rows }} feed items</div>
+    </b-row>
+  </b-container>
+</template>
+
+<script>
+export default {
+  name: "FeedTable",
+  props: {
+    feedTableId: String,
+    feed: Array,
+    fields: Array,
+  },
+  computed: {
+    rows() {
+      return this.feed.length;
+    },
+  },
+  data() {
+    return {
+      perPage: 4,
+      currentPage: 1,
+    };
+  },
+};
+</script>
+
+<style>
+.feed-table {
+  width: 90vw;
+  /* box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%); */
+}
+
+.feed-items {
+  width: 80vw;
+}
+
+.feed-content {
+  size: inherit;
+}
+
+img {
+  max-width: 500px;
+}
+.row-no {
+  padding: 8px;
+}
+
+.feed-items {
+  width: 80vw;
+}
+
+.page-item.active .page-link {
+  background-color: #3da3b8 !important;
+  border-color: #3da3b8 !important;
+}
+
+a .feed-table{
+  color: #163e46 !important;
+}
+
+.mb-2, .my-2 {
+  margin-bottom: 0rem !important;
+}
+.btn.content {
+  padding: .1rem .5rem;
+}
+</style>
