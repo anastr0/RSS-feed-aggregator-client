@@ -90,8 +90,13 @@ export default {
       if (validated(feedURL.trim())) {
         this.startLoading();
         fetchRSSFeed(feedURL.trim()).then((data) => {
-          this.queryDone = true;
           this.feed = data.RSSFeedList;
+          if(this.feed.length > 0) {
+            this.queryDone = true;
+            return 
+          } else {
+            alert("Error fetching feed")
+          }
         });
       }
     },
