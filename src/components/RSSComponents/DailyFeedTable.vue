@@ -1,5 +1,10 @@
 <template>
-  <FeedTable v-if="this.itemsMounted" :feed="dailyFeed" :fieldTableId="feedTableId" :fields="fields" />
+  <FeedTable
+    v-if="this.itemsMounted"
+    :feed="dailyFeed"
+    :fieldTableId="feedTableId"
+    :fields="fields"
+  />
 </template>
 
 <script>
