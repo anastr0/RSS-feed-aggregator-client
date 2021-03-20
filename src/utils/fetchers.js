@@ -65,11 +65,10 @@ export const addURL = (feedURL) => {
   }
 };
 
-const getFeedURLs = () => {
+export const getFeedURLs = () => {
   // read stringified list of feedURLs from localstorage
   // return JSON for /aggregate req
-  var feedURLs = JSON.parse(localStorage.getItem("feedURLs"));
-  return JSON.stringify({ feedURLs });
+  return JSON.parse(localStorage.getItem("feedURLs"));
 };
 
 export const fetchRSSFeed = (feedURL) => {
@@ -92,17 +91,16 @@ export const fetchRSSFeed = (feedURL) => {
     });
 };
 
-export const fetchAggregatedRSSFeed = () => {
+export const fetchAggregatedRSSFeed = (feedURLs) => {
   // GET request with stored feedURLs
   // Server response with aggregated RSS feed
-
   return fetch(`${server_domain}/v${version_number}/aggregate-feed/`, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
-    body: getFeedURLs(),
+    body: JSON.stringify({feedURLs}),
   })
     .then((res) => res.json())
     .catch((err) => {

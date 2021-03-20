@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { fetchAggregatedRSSFeed } from "../../utils/fetchers";
+import { fetchAggregatedRSSFeed, getFeedURLs } from "../../utils/fetchers";
 import FeedTable from "./FeedTable.vue";
 
 export default {
@@ -25,12 +25,13 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
-      // Code that will run only after the
-      // entire view has been rendered
-      fetchAggregatedRSSFeed().then((data) => {
+      const feedURLs = getFeedURLs()
+      if (feedURLs!==null) {
+        fetchAggregatedRSSFeed(feedURLs).then((data) => {
         console.log(data.RSSFeedList);
         this.dailyFeed = data.RSSFeedList;
-      });
+        });
+      } 
     });
   },
   data() {
@@ -49,6 +50,7 @@ export default {
       ],
       dailyFeed: [],
       feedTableId: "daily-feed-results",
+      message: ""
     };
   },
 };
