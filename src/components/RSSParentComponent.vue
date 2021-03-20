@@ -10,7 +10,7 @@
     </b-progress>
     <SearchBar v-on:get-feed="getFeed" />
 
-    <b-card no-body>
+    <b-card v-if="showFeedCard" no-body>
       <b-nav pills small slot="header" v-b-scrollspy:nav-scroller>
         <b-nav-item href="#rss-feed-table"
           >Search feed</b-nav-item
@@ -35,7 +35,7 @@
 import SearchBar from "./RSSComponents/SearchBar.vue";
 import RSSFeedTable from "./RSSComponents/RSSFeedTable.vue";
 import DailyFeedTable from "./RSSComponents/DailyFeedTable.vue";
-import { fetchRSSFeed, validated } from "../utils/fetchers";
+import { fetchRSSFeed, validated, getFeedURLs } from "../utils/fetchers";
 
 export default {
   name: "RSSParentComponent",
@@ -47,7 +47,6 @@ export default {
   data() {
     return {
       feed: Array(),
-      // resultsBackup is needed for frontend filtering of results by isactive checkbox
       queryDone: false,
       loading: false,
       loadingTime: 0,
@@ -76,6 +75,12 @@ export default {
   },
   created() {
     this.$_loadingTimeInterval = null;
+  },
+  computed: {
+    showFeedCard() {
+      const feedURLs = getFeedURLs()
+      return this.queryDone || feedURLs!==null;
+    },
   },
   mounted() {
     this.startLoading();
