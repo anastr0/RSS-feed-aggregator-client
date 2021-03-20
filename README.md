@@ -15,7 +15,6 @@ Check out [server](https://github.com/anaswaratrajan/RSS-feed-aggregator-server)
 # Prerequisites
 
 * node 14.7+
-* Vue-cli
 
 # Setup
 
@@ -38,7 +37,6 @@ npm run serve
 * Give RSS feed for a given feed URL
 * Give aggregated RSS feed of feedURLs saved by user so far. 
 > Note: Stored state will be lost on deleting browser data since feedURLs are stored in localstorage
-* Can fetch contents from CORs disabled RSS domains
 * Both sections have feed list sortable by published date
 * Burger icon expands each headline to render the content ( Also renders html content )
 
