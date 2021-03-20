@@ -32,9 +32,15 @@ export default {
 }
 
 .container-fluid {
-  width: 90vw;
-  margin-block: 2rem;
+  width: 90vw;  
+}
+
+.shadows {
   box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%);
+}
+
+a {
+    color: #016378;
 }
 
 ::-webkit-scrollbar {

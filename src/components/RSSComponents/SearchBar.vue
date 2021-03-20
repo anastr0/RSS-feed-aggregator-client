@@ -1,5 +1,5 @@
 <template>
-  <b-container class="search-bar shadows" fluid>
+  <b-container class="search-bar" fluid>
     <b-row>
       <b-col sm="8">
         <input
@@ -64,8 +64,8 @@ export default {
 
 <style scoped>
 .search-bar {
-  margin-block: 3rem;
-  padding: 30px 15px;
+  margin-block: 2rem;
+  padding: 30px 12px;
   width: 90vw;
   border: 0.1rem solid #dee2e6;
   border-radius: 0.25rem;

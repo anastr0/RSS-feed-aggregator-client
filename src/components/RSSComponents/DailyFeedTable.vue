@@ -1,14 +1,16 @@
 <template>
+<div id="daily-feed-table">
   <FeedTable
-    v-if="this.itemsMounted"
+    v-if="itemsMounted"
     :feed="dailyFeed"
     :fieldTableId="feedTableId"
     :fields="fields"
   />
+  </div>
 </template>
 
 <script>
-import { fetchAggregatedRSSFeed } from "../../utils/fetchers";
+import { fetchAggregatedRSSFeed, getFeedURLs } from "../../utils/fetchers";
 import FeedTable from "./FeedTable.vue";
 
 export default {
@@ -23,12 +25,13 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
-      // Code that will run only after the
-      // entire view has been rendered
-      fetchAggregatedRSSFeed().then((data) => {
+      const feedURLs = getFeedURLs()
+      if (feedURLs!==null) {
+        fetchAggregatedRSSFeed(feedURLs).then((data) => {
         console.log(data.RSSFeedList);
         this.dailyFeed = data.RSSFeedList;
-      });
+        });
+      } 
     });
   },
   data() {
@@ -36,7 +39,7 @@ export default {
       fields: [
         {
           key: "title",
-          label: "Daily Feed",
+          label: "Items",
         },
         {
           key: "pubDate",
@@ -47,6 +50,7 @@ export default {
       ],
       dailyFeed: [],
       feedTableId: "daily-feed-results",
+      message: ""
     };
   },
 };

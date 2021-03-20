@@ -1,5 +1,7 @@
 <template>
-  <FeedTable :feed="feed" :fieldTableId="feedTableId" :fields="fields" />
+<div id="rss-feed-table">
+  <FeedTable v-if="itemsFetched" :feed="feed" :fieldTableId="feedTableId" :fields="fields" />
+  </div>
 </template>
 
 <script>
@@ -13,12 +15,17 @@ export default {
   props: {
     feed: Array,
   },
+  computed: {
+    itemsFetched() {
+      return this.feed.length > 0;
+    }
+  },
   data() {
     return {
       fields: [
         {
           key: "title",
-          label: "RSS Feed",
+          label: "Items",
           sortable: false,
         },
         {

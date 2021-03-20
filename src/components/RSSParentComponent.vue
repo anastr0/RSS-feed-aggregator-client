@@ -1,11 +1,33 @@
 <template>
   <div>
-    <b-progress class="w-100" variant="info" :max="maxLoadingTime" height=".3rem">
+    <b-progress
+      class="w-100"
+      variant="info"
+      :max="maxLoadingTime"
+      height=".3rem"
+    >
       <b-progress-bar :value="loadingTime"></b-progress-bar>
     </b-progress>
     <SearchBar v-on:get-feed="getFeed" />
-    <RSSFeedTable v-if="queryDone" v-bind:feed="feed" />
-    <DailyFeedTable />
+
+    <b-card v-if="showFeedCard" no-body>
+      <b-nav pills small slot="header" v-b-scrollspy:nav-scroller>
+        <b-nav-item href="#rss-feed-table"
+          >Search feed</b-nav-item
+        >
+        <b-nav-item href="#daily-feed-table"
+          >Daily feed</b-nav-item
+        >
+      </b-nav>
+      <b-card-body
+        id="nav-scroller"
+        ref="content"
+        style="position:relative; height:438px; width: fit-content; overflow-y:scroll;"
+      >
+        <RSSFeedTable v-if="queryDone" v-bind:feed="feed" />
+        <DailyFeedTable />
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
@@ -13,7 +35,7 @@
 import SearchBar from "./RSSComponents/SearchBar.vue";
 import RSSFeedTable from "./RSSComponents/RSSFeedTable.vue";
 import DailyFeedTable from "./RSSComponents/DailyFeedTable.vue";
-import { fetchRSSFeed, validated } from "../utils/fetchers";
+import { fetchRSSFeed, validated, getFeedURLs } from "../utils/fetchers";
 
 export default {
   name: "RSSParentComponent",
@@ -25,7 +47,6 @@ export default {
   data() {
     return {
       feed: Array(),
-      // resultsBackup is needed for frontend filtering of results by isactive checkbox
       queryDone: false,
       loading: false,
       loadingTime: 0,
@@ -55,6 +76,12 @@ export default {
   created() {
     this.$_loadingTimeInterval = null;
   },
+  computed: {
+    showFeedCard() {
+      const feedURLs = getFeedURLs()
+      return this.queryDone || feedURLs!==null;
+    },
+  },
   mounted() {
     this.startLoading();
   },
@@ -75,7 +102,22 @@ export default {
     clearLoadingTimeInterval: function() {
       clearInterval(this.$_loadingTimeInterval);
       this.$_loadingTimeInterval = null;
-    },
+    }
   },
 };
 </script>
+
+<style scoped>
+.card {
+  width: 90vw;
+  margin: auto;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #3da3b8;
+}
+</style>
