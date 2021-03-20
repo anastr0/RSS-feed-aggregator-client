@@ -23,12 +23,12 @@ export const validURL = (feedURL) => {
   var pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
     "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + 
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + 
+    "((\\d{1,3}\\.){3}\\d{1,3}))" +
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
     "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ); 
+  );
   return !!pattern.test(feedURL);
 };
 
@@ -100,7 +100,7 @@ export const fetchAggregatedRSSFeed = (feedURLs) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({feedURLs}),
+    body: JSON.stringify({ feedURLs }),
   })
     .then((res) => res.json())
     .catch((err) => {

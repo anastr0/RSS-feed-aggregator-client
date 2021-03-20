@@ -83,7 +83,7 @@ export default {
   computed: {
     rows() {
       return this.feed.length;
-    }
+    },
   },
   data() {
     return {

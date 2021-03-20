@@ -1,11 +1,11 @@
 <template>
-<div id="daily-feed-table">
-  <FeedTable
-    v-if="itemsMounted"
-    :feed="dailyFeed"
-    :fieldTableId="feedTableId"
-    :fields="fields"
-  />
+  <div id="daily-feed-table">
+    <FeedTable
+      v-if="itemsMounted"
+      :feed="dailyFeed"
+      :fieldTableId="feedTableId"
+      :fields="fields"
+    />
   </div>
 </template>
 
@@ -25,13 +25,13 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
-      const feedURLs = getFeedURLs()
-      if (feedURLs!==null) {
+      const feedURLs = getFeedURLs();
+      if (feedURLs !== null) {
         fetchAggregatedRSSFeed(feedURLs).then((data) => {
-        console.log(data.RSSFeedList);
-        this.dailyFeed = data.RSSFeedList;
+          console.log(data.RSSFeedList);
+          this.dailyFeed = data.RSSFeedList;
         });
-      } 
+      }
     });
   },
   data() {
@@ -50,7 +50,7 @@ export default {
       ],
       dailyFeed: [],
       feedTableId: "daily-feed-results",
-      message: ""
+      message: "",
     };
   },
 };
