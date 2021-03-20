@@ -1,6 +1,11 @@
 <template>
-<div id="rss-feed-table">
-  <FeedTable v-if="itemsFetched" :feed="feed" :fieldTableId="feedTableId" :fields="fields" />
+  <div id="rss-feed-table">
+    <FeedTable
+      v-if="itemsFetched"
+      :feed="feed"
+      :fieldTableId="feedTableId"
+      :fields="fields"
+    />
   </div>
 </template>
 
@@ -18,7 +23,7 @@ export default {
   computed: {
     itemsFetched() {
       return this.feed.length > 0;
-    }
+    },
   },
   data() {
     return {
@@ -32,7 +37,6 @@ export default {
           key: "pubDate",
           label: "published",
           sortable: true,
-          // Variant applies to the whole column, including the header and footer
         },
         { key: "content", label: "content" },
       ],

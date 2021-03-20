@@ -1,10 +1,8 @@
 const server_domain = process.env.VUE_APP_SERVER_DOMAIN;
 const version_number = process.env.VUE_APP_VERSION_NUMBER;
-// Had no time to setup .env. Sorry.
 
 export const validated = (feedURL) => {
-  // validate string
-
+  // validate URL
   if (feedURL.length > 0) {
     if (validURL(feedURL)) {
       return true;
@@ -21,14 +19,14 @@ export const validated = (feedURL) => {
 export const validURL = (feedURL) => {
   // validate URL
   var pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + 
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + 
-    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+    "^(https?:\\/\\/)?" + 
+    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + 
+    "((\\d{1,3}\\.){3}\\d{1,3}))" +
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+    "(\\?[;&a-z\\d%_.~+=-]*)?" + 
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ); 
+  );
   return !!pattern.test(feedURL);
 };
 
@@ -66,16 +64,13 @@ export const addURL = (feedURL) => {
 };
 
 export const getFeedURLs = () => {
-  // read stringified list of feedURLs from localstorage
-  // return JSON for /aggregate req
+  // parse and return list of feedURLs from localstorage
   return JSON.parse(localStorage.getItem("feedURLs"));
 };
 
 export const fetchRSSFeed = (feedURL) => {
   // POST request with feedURL query
   // Server response with RSS feed to given feedURL
-
-  // console.log(JSON.stringify({ feedURL }));
 
   return fetch(`${server_domain}/v${version_number}/rss-feed/`, {
     method: "POST",
@@ -94,13 +89,14 @@ export const fetchRSSFeed = (feedURL) => {
 export const fetchAggregatedRSSFeed = (feedURLs) => {
   // GET request with stored feedURLs
   // Server response with aggregated RSS feed
+  
   return fetch(`${server_domain}/v${version_number}/aggregate-feed/`, {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({feedURLs}),
+    body: JSON.stringify({ feedURLs }),
   })
     .then((res) => res.json())
     .catch((err) => {
