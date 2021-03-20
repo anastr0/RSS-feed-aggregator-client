@@ -19,8 +19,13 @@ Check out [server](https://github.com/anaswaratrajan/RSS-feed-aggregator-server)
 # Setup
 
 ```
-npm i
+cd RSS-feed-aggregator-server
 
+npm i
+```
+
+> Rename .env.example to .env
+```
 npm run serve
 ```
 
