@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <b-progress class="w-100" variant="info" :max="maxLoadingTime" height=".3rem">
       <b-progress-bar :value="loadingTime"></b-progress-bar>
     </b-progress>
@@ -61,9 +60,6 @@ export default {
   },
   methods: {
     getFeed: function(feedURL) {
-      console.log(feedURL);
-      // feedURL = "https://home.cern/api/news/news/feed.rss"
-
       if (validated(feedURL.trim())) {
         this.startLoading();
         fetchRSSFeed(feedURL.trim()).then((data) => {
@@ -83,5 +79,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
