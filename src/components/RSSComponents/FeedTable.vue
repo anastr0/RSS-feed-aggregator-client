@@ -1,5 +1,5 @@
 <template>
-  <b-container class="feed-table shadows" fluid>
+  <b-container class="feed-table" fluid>
     <b-row align-h="center">
       <b-table
         hover
@@ -8,8 +8,6 @@
         :per-page="perPage"
         :items="feed"
         :fields="fields"
-        outlined
-        caption-top
       >
         <template #table-colgroup="scope">
           <col
@@ -46,16 +44,12 @@
 
         <template #row-details="row">
           <b-card>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Source:</b></b-col>
+            <b-row v-if="row.item.source" class="mb-2">
+              <b-col sm="1" class="text-sm-right"><b>Source:</b></b-col>
               <b-col>{{ row.item.source }}</b-col>
             </b-row>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Guid:</b></b-col>
-              <b-col>{{ row.item.guid }}</b-col>
-            </b-row>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"><b>Content:</b></b-col>
+            <b-row v-if="row.item.description" class="mb-2">
+              <b-col sm="1" class="text-sm-right"><b>Content:</b></b-col>
               <b-col
                 ><span class="feed-content" v-html="row.item.description"></span
               ></b-col>
@@ -89,11 +83,11 @@ export default {
   computed: {
     rows() {
       return this.feed.length;
-    },
+    }
   },
   data() {
     return {
-      perPage: 4,
+      perPage: 6,
       currentPage: 1,
     };
   },
@@ -102,12 +96,15 @@ export default {
 
 <style>
 .feed-table {
-  width: 90vw;
+  margin-block-end: 1rem;
+  width: inherit;
 }
 
+/*
 .feed-items {
   width: 80vw;
 }
+*/
 
 .feed-content {
   size: inherit;
@@ -118,10 +115,6 @@ img {
 }
 .row-no {
   padding: 8px;
-}
-
-.feed-items {
-  width: 80vw;
 }
 
 .page-item.active .page-link {

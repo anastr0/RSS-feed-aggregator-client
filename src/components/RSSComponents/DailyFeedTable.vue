@@ -1,10 +1,12 @@
 <template>
+<div id="daily-feed-table">
   <FeedTable
-    v-if="this.itemsMounted"
+    v-if="itemsMounted"
     :feed="dailyFeed"
     :fieldTableId="feedTableId"
     :fields="fields"
   />
+  </div>
 </template>
 
 <script>
@@ -36,7 +38,7 @@ export default {
       fields: [
         {
           key: "title",
-          label: "Daily Feed",
+          label: "Items",
         },
         {
           key: "pubDate",

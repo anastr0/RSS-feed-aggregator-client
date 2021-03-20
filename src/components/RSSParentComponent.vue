@@ -1,11 +1,33 @@
 <template>
   <div>
-    <b-progress class="w-100" variant="info" :max="maxLoadingTime" height=".3rem">
+    <b-progress
+      class="w-100"
+      variant="info"
+      :max="maxLoadingTime"
+      height=".3rem"
+    >
       <b-progress-bar :value="loadingTime"></b-progress-bar>
     </b-progress>
     <SearchBar v-on:get-feed="getFeed" />
-    <RSSFeedTable v-if="queryDone" v-bind:feed="feed" />
-    <DailyFeedTable />
+
+    <b-card no-body>
+      <b-nav pills small slot="header" v-b-scrollspy:nav-scroller>
+        <b-nav-item href="#rss-feed-table"
+          >Search feed</b-nav-item
+        >
+        <b-nav-item href="#daily-feed-table"
+          >Daily feed</b-nav-item
+        >
+      </b-nav>
+      <b-card-body
+        id="nav-scroller"
+        ref="content"
+        style="position:relative; height:438px; width: fit-content; overflow-y:scroll;"
+      >
+        <RSSFeedTable v-if="queryDone" v-bind:feed="feed" />
+        <DailyFeedTable />
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
@@ -75,7 +97,22 @@ export default {
     clearLoadingTimeInterval: function() {
       clearInterval(this.$_loadingTimeInterval);
       this.$_loadingTimeInterval = null;
-    },
+    }
   },
 };
 </script>
+
+<style scoped>
+.card {
+  width: 90vw;
+  margin: auto;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #3da3b8;
+}
+</style>
