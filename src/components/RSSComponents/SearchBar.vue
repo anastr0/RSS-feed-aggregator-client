@@ -11,6 +11,7 @@
           placeholder="Enter RSS feed link"
         />
       </b-col>
+      <!--button "get feed" that emits getFeed method in RSSParentComponent onclick -->
       <b-col sm="2">
         <button
           type="button"
@@ -24,7 +25,7 @@
         <button
           type="button"
           class="search-button btn btn-outline-info btn-block"
-          v-on:click="setURLInCookie"
+          v-on:click="setURLInLocalStorage"
         >
           + daily feed
         </button>
@@ -52,7 +53,7 @@ export default {
     consoleURL: function() {
       console.log("haha");
     },
-    setURLInCookie: function(event) {
+    setURLInLocalStorage: function(event) {
       event.preventDefault();
       if (validated(this.feedURL.trim())) {
         addURL(this.feedURL.trim());

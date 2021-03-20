@@ -35,14 +35,13 @@ export default {
   width: 90vw;  
 }
 
-.shadows {
-  box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%);
-}
-
 a {
-    color: #016378;
+  color: #016378;
 }
 
+a:hover {
+  color: #3da3b8;
+}
 ::-webkit-scrollbar {
   width: 6px;
 }

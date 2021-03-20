@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Progress bar -->
     <b-progress
       class="w-100"
       variant="info"
@@ -8,8 +9,11 @@
     >
       <b-progress-bar :value="loadingTime"></b-progress-bar>
     </b-progress>
+
+    <!--Searchbar -->
     <SearchBar v-on:get-feed="getFeed" />
 
+    <!-- FeedCard with scrollspy for feed tables-->
     <b-card v-if="showFeedCard" no-body>
       <b-nav pills small slot="header" v-b-scrollspy:nav-scroller>
         <b-nav-item href="#rss-feed-table">Search feed</b-nav-item>
@@ -53,7 +57,6 @@ export default {
     loading(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.clearLoadingTimeInterval();
-
         if (newValue) {
           this.$_loadingTimeInterval = setInterval(() => {
             this.loadingTime++;
@@ -83,6 +86,7 @@ export default {
   },
   methods: {
     getFeed: function(feedURL) {
+      // fetch RSS feed for given feedURL query
       if (validated(feedURL.trim())) {
         this.startLoading();
         fetchRSSFeed(feedURL.trim()).then((data) => {

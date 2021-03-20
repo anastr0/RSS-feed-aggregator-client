@@ -37,7 +37,6 @@ export default {
           key: "pubDate",
           label: "published",
           sortable: true,
-          // Variant applies to the whole column, including the header and footer
         },
         { key: "content", label: "content" },
       ],

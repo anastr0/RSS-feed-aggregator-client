@@ -1,7 +1,7 @@
 <template>
   <div id="daily-feed-table">
     <FeedTable
-      v-if="itemsMounted"
+      v-if="itemsFetched"
       :feed="dailyFeed"
       :fieldTableId="feedTableId"
       :fields="fields"
@@ -19,14 +19,16 @@ export default {
     FeedTable,
   },
   computed: {
-    itemsMounted() {
+    itemsFetched() {
       return this.dailyFeed.length > 0;
     },
   },
   mounted: function() {
     this.$nextTick(function() {
+      // fetch aggregated daily feed on load
       const feedURLs = getFeedURLs();
       if (feedURLs !== null) {
+        // fetch aggregated feed only if feedURLs list is not empty
         fetchAggregatedRSSFeed(feedURLs).then((data) => {
           console.log(data.RSSFeedList);
           this.dailyFeed = data.RSSFeedList;
@@ -36,7 +38,7 @@ export default {
   },
   data() {
     return {
-      fields: [
+      fields: [ 
         {
           key: "title",
           label: "Items",
@@ -49,8 +51,7 @@ export default {
         { key: "content", label: "content" },
       ],
       dailyFeed: [],
-      feedTableId: "daily-feed-results",
-      message: "",
+      feedTableId: "daily-feed-results"
     };
   },
 };

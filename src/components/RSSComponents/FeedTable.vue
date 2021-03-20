@@ -9,7 +9,8 @@
         :items="feed"
         :fields="fields"
       >
-        <template #table-colgroup="scope">
+      <!-- custom width to published and content field-->
+        <template #table-colgroup="scope">  
           <col
             v-for="field in scope.fields"
             :key="field.key"
@@ -22,16 +23,19 @@
           />
         </template>
 
+        <!-- title field render with link to source -->
         <template #cell(title)="data">
           <a :href="`${data.item.link}`" class="link-info">{{
             data.item.title
           }}</a>
         </template>
 
+        <!-- published date remove time and timezone data from string-->
         <template #cell(pubDate)="data">
           {{ data.item.pubDate.slice(0, 10) }}
         </template>
 
+        <!-- content toggle -->
         <template #cell(content)="row">
           <b-button
             variant="outline-info"
@@ -57,11 +61,13 @@
           </b-card>
         </template>
       </b-table>
+
+      <!-- pagination nav -->
       <b-pagination
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"
-        :aria-controls="daily - feed - results"
+        :aria-controls="feedTableId"
         size="sm"
         limit="1"
         align="center"
@@ -99,12 +105,6 @@ export default {
   margin-block-end: 1rem;
   width: inherit;
 }
-
-/*
-.feed-items {
-  width: 80vw;
-}
-*/
 
 .feed-content {
   size: inherit;
