@@ -9,9 +9,25 @@
         :items="feed"
         :fields="fields"
         outlined
+        caption-top
       >
+        <template #table-colgroup="scope">
+          <col
+            v-for="field in scope.fields"
+            :key="field.key"
+            :style="{
+              width:
+                field.key === 'pubDate' || field.key === 'content'
+                  ? '10px'
+                  : '1000px',
+            }"
+          />
+        </template>
+
         <template #cell(title)="data">
-          <a :href="`${data.item.link}`" class="link-info">{{ data.item.title }}</a>
+          <a :href="`${data.item.link}`" class="link-info">{{
+            data.item.title
+          }}</a>
         </template>
 
         <template #cell(pubDate)="data">
@@ -87,7 +103,6 @@ export default {
 <style>
 .feed-table {
   width: 90vw;
-  /* box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%); */
 }
 
 .feed-items {
@@ -114,14 +129,11 @@ img {
   border-color: #3da3b8 !important;
 }
 
-a .feed-table{
-  color: #163e46 !important;
-}
-
-.mb-2, .my-2 {
+.mb-2,
+.my-2 {
   margin-bottom: 0rem !important;
 }
 .btn.content {
-  padding: .1rem .5rem;
+  padding: 0.1rem 0.5rem;
 }
 </style>

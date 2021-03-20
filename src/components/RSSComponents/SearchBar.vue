@@ -30,7 +30,11 @@
         </button>
       </b-col>
     </b-row>
-    <b-row> <div class="example">Eg. https://home.cern/api/news/news/feed.rss</div></b-row>
+    <b-row>
+      <div class="example">
+        Eg. https://home.cern/api/news/news/feed.rss
+      </div></b-row
+    >
   </b-container>
 </template>
 
@@ -60,12 +64,11 @@ export default {
 
 <style scoped>
 .search-bar {
-  margin-block: 2rem;
+  margin-block: 3rem;
   padding: 30px 15px;
   width: 90vw;
-  /*box-shadow: 0px 5px 17px 5px rgb(0 0 0 / 7%);*/
-  border: .1rem solid #dee2e6;
-  border-radius: .25rem;
+  border: 0.1rem solid #dee2e6;
+  border-radius: 0.25rem;
 }
 
 .example {
